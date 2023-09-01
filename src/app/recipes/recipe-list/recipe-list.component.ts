@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { Recipe } from '../recipe.model';
 
 @Component({
@@ -7,11 +7,16 @@ import { Recipe } from '../recipe.model';
   styleUrls: ['./recipe-list.component.css']
 })
 export class RecipeListComponent {
+   @Output() recipeWasSelected = new EventEmitter<Recipe>();
 
     recipes: Recipe[] = [
         new Recipe("Kebabpizza", "Fett god pizza", "https://img.koket.se/standard-mega/stellas-kebabpizza.png.jpg"),
         new Recipe("Vegetarisk pizza", "Också fett god pizza,", "https://receptfavoriter.se/sites/default/files/styles/recipe_16x9/public/vegetarisk_pizza_i_langpanna_85_1060.jpg"),
         new Recipe("Vegetarisk pizza", "Också fett god pizza,", "https://receptfavoriter.se/sites/default/files/styles/recipe_16x9/public/vegetarisk_pizza_i_langpanna_85_1060.jpg"),
     ];
+
+    onRecipeSelected(recipe: Recipe){
+        this.recipeWasSelected.emit(recipe)
+    }
 
 }
